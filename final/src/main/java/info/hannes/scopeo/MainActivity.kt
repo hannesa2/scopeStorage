@@ -50,21 +50,21 @@ class MainActivity : AppCompatActivity() {
         }
 
         viewModel.images.observe(this, Observer<List<Image>> { images ->
-          galleryAdapter.submitList(images)
+            galleryAdapter.submitList(images)
         })
 
         viewModel.permissionNeededForDelete.observe(this, Observer { intentSender ->
-          intentSender?.let {
-            startIntentSenderForResult(
-                    intentSender,
-                    DELETE_PERMISSION_REQUEST,
-                    null,
-                    0,
-                    0,
-                    0,
-                    null
-            )
-          }
+            intentSender?.let {
+                startIntentSenderForResult(
+                        intentSender,
+                        DELETE_PERMISSION_REQUEST,
+                        null,
+                        0,
+                        0,
+                        0,
+                        null
+                )
+            }
         })
 
         openAlbumButton.setOnClickListener { openMediaStore() }
@@ -82,28 +82,28 @@ class MainActivity : AppCompatActivity() {
             permissions: Array<String>,
             grantResults: IntArray
     ) {
-      super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-      when (requestCode) {
-          READ_EXTERNAL_STORAGE_REQUEST -> {
-            // If request is cancelled, the result arrays are empty.
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-              showImages()
-            } else {
-              // If we weren't granted the permission, check to see if we should show
-              // rationale for the permission.
-              val showRationale =
-                      ActivityCompat.shouldShowRequestPermissionRationale(
-                              this,
-                              Manifest.permission.READ_EXTERNAL_STORAGE
-                      )
-              if (showRationale) {
-                showNoAccess()
-              } else {
-                goToSettings()
-              }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            READ_EXTERNAL_STORAGE_REQUEST -> {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    showImages()
+                } else {
+                    // If we weren't granted the permission, check to see if we should show
+                    // rationale for the permission.
+                    val showRationale =
+                            ActivityCompat.shouldShowRequestPermissionRationale(
+                                    this,
+                                    Manifest.permission.READ_EXTERNAL_STORAGE
+                            )
+                    if (showRationale) {
+                        showNoAccess()
+                    } else {
+                        goToSettings()
+                    }
+                }
+                return
             }
-            return
-          }
         }
     }
 
