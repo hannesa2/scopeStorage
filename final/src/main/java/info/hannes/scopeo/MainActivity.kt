@@ -178,7 +178,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private inner class GalleryAdapter(val onClick: (Image) -> Unit) :
-            ListAdapter<Image, ImageViewHolder>(Image.DiffCallback) {
+            ListAdapter<Image, ImageViewHolder>(Image.diffCallback) {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
             val layoutInflater = LayoutInflater.from(parent.context)
